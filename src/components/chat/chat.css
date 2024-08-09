@@ -1,0 +1,227 @@
+.chat {
+  flex: 2;
+  /* overflow-y: auto; */
+  /* background-color: aliceblue; */
+  border-right: 1px solid var(--primary-bg-color);
+  border-left: 1px solid var(--primary-bg-color);
+  /* border-right: 1px solid var(--border-color); */
+  /* border-left: 1px solid var(--border-color); */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .top {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      .texts {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        span {
+          font-size: 18px;
+          font-weight: bold;
+        }
+
+        p {
+          font-size: 14px;
+          font-weight: 300;
+          color: var(--secondary-color);
+        }
+      }
+    }
+
+    .icons {
+      display: flex;
+      gap: 20px;
+      cursor: pointer;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  /* WebKit-based browsers */
+  .center::-webkit-scrollbar {
+    width: 6px;
+    height: 0px;
+  }
+
+  .center::-webkit-scrollbar-track {
+    /* background: var(--primary-bg-color) ; */
+    background: transparent;
+  }
+
+  .center::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-color);
+    height: 4px;
+  }
+
+  .center {
+    padding: 20px;
+    flex: 1;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .message {
+      max-width: 70%;
+      display: flex;
+      gap: 20px;
+
+      .texts {
+        p {
+          font-size: 12.5px;
+        }
+        .audio-container {
+          background-color: var(--tertiary-bg-color);; /* Black background for the audio container */
+          border-radius: 10px; /* Rounded corners */
+          padding: 10px; /* Space around the audio element */
+          display: flex;
+          align-items: center; /* Center items vertically */
+          width: auto;
+        }
+      }
+
+      &.own {
+        align-self: flex-end;
+
+        .texts {
+          p {
+            font-size: 12.5px;
+
+            background-color: #3368ec;
+          }
+          .audio-container {
+            background-color: #3368ec; /* Black background for the audio container */
+            border-radius: 10px; /* Rounded corners */
+            padding: 10px; /* Space around the audio element */
+            display: flex;
+            align-items: center; /* Center items vertically */
+            width: auto;
+          }
+        }
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .texts {
+  
+        gap: 5px;
+        img {
+          width: 100%;
+          height: 300px;
+          border-radius: 10px;
+          object-fit: contain;
+        }
+        p {
+          padding: 8px;
+          font-size: 14px !important;
+          background-color: var(--tertiary-bg-color);
+          border-radius: 6px;
+        }
+        span {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  .bottom {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-color);
+    gap: 20px;
+    margin-top: auto;
+    .icons {
+      display: flex;
+
+      gap: 20px;
+    }
+    img {
+      height: 20px;
+      width: 20px;
+      cursor: pointer;
+    }
+
+    input {
+      flex: 1;
+      background-color: var(--primary-bg-color);
+      border: none;
+      outline: none;
+      color: var(--text-color);
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-style: 16px;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    .emoji {
+      position: relative;
+
+      .picker {
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+      }
+    }
+    .sendButton {
+      background-color: var(--button-send);
+      color: var(--text-color);
+      padding: 10px 20px;
+      border: none;
+      font-size: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: #5182feb4;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+#wink-emoji {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+
+.user .texts p.online {
+  color: green !important; /* Online color */
+}
+
+.user .texts p.offline {
+  color: red !important; /* Offline color */
+}

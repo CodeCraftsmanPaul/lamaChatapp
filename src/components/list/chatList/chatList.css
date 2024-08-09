@@ -1,0 +1,90 @@
+/* WebKit-based browsers */
+.chatList::-webkit-scrollbar {
+  width: 6px;
+  height: 0px;
+}
+
+.chatList::-webkit-scrollbar-track {
+  /* background: var(--primary-bg-color) ;*/
+  background: transparent;
+}
+
+.chatList::-webkit-scrollbar-thumb {
+  background-color: var(--background-color);
+  height: 4px;
+}
+
+.chatList {
+  flex: 1;
+  overflow: scroll;
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+
+    .searchBar {
+      flex: 1;
+      background-color: var(--primary-bg-color);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-radius: 10px;
+      padding: 10px;
+
+      input {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: var(--text-color);
+        flex: 1;
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .add {
+      width: 36px;
+      height: 36px;
+      background-color: var(--primary-bg-color);
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .item {
+    display: flex;
+    align-items: center ;
+    gap: 20px;
+    padding: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .texts {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      span {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      p {
+        font-size: 13.85px;
+        font-weight: 100 ;
+      }
+    }
+  }
+}
