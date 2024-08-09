@@ -13,10 +13,10 @@ import {
   where,
 } from "firebase/firestore";
 import { useUserStore } from "../../../../lib/userStore";
+import { toast } from "react-toastify"; // Import toast
 
 const AddUser = () => {
   const [user, setUser] = useState(null);
-
   const { currentUser } = useUserStore();
 
   const handleSearch = async (e) => {
@@ -26,14 +26,14 @@ const AddUser = () => {
 
     try {
       const userRef = collection(db, "users");
-
-      // Create a query against the collection.
       const q = query(userRef, where("username", "==", username));
-
       const querySnapShot = await getDocs(q);
 
       if (!querySnapShot.empty) {
         setUser(querySnapShot.docs[0].data());
+      } else {
+        setUser(null); // Clear the previous user state
+        toast.error("User not found"); // Show toast notification
       }
     } catch (err) {
       console.log(err);
@@ -41,6 +41,8 @@ const AddUser = () => {
   };
 
   const handleAdd = async () => {
+    if (!user) return; // Return early if no user is selected
+
     const chatRef = collection(db, "chats");
     const userChatsRef = collection(db, "userchats");
 
@@ -51,7 +53,7 @@ const AddUser = () => {
         createdAt: serverTimestamp(),
         messages: [],
       });
-      // console.log(newChatRef.id)
+
       await updateDoc(doc(userChatsRef, user.id), {
         chats: arrayUnion({
           chatId: newChatRef.id,
@@ -60,7 +62,7 @@ const AddUser = () => {
           updatedAt: Date.now(),
         }),
       });
-      
+
       await updateDoc(doc(userChatsRef, currentUser.id), {
         chats: arrayUnion({
           chatId: newChatRef.id,
@@ -77,7 +79,7 @@ const AddUser = () => {
   return (
     <div className="addUser">
       <form onSubmit={handleSearch}>
-        <input type="text " placeholder="username" name="username" />
+        <input type="text" placeholder="Username" name="username" />
         <button>Search</button>
       </form>
       {user && (

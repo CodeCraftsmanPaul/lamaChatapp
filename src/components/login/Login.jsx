@@ -8,8 +8,11 @@ import {
 import { auth, db } from "../../lib/firebase"; // Adjust the path as necessary
 import { doc, setDoc } from "firebase/firestore";
 import upload from "../../lib/upload";
+import { useUserStore } from "../../lib/userStore"; // Import useUserStore
 
 const Login = () => {
+  const { fetchUserInfo } = useUserStore(); // Access fetchUserInfo from the store
+
   // Avatar upload
   const [avatar, setAvatar] = useState({
     file: null,
@@ -36,7 +39,6 @@ const Login = () => {
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      // console.log("User registered:", res.user);
       const imgUrl = await upload(avatar.file);
 
       await setDoc(doc(db, "users", res.user.uid), {
@@ -51,7 +53,9 @@ const Login = () => {
         chats: [],
       });
 
-      toast.success("Account created you can login now!");
+      fetchUserInfo(res.user.uid); // Call fetchUserInfo after registration
+
+      toast.success("Account created and logged in successfully!");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -68,8 +72,7 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-
-      toast.success(" login Successful !");
+      toast.success("Login successful!");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
