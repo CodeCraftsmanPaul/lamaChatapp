@@ -23,7 +23,7 @@ html {
 }
 
 body {
-  background-image: url("./bg.jpg");
+  background-image: url("../public/bg.jpg");
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +43,7 @@ body {
   display: flex;
 }
 
-.loading{
+.loading {
   /* width: 120% !important; */
   padding: 50px;
   font-size: 36px;
